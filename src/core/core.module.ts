@@ -1,18 +1,27 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { RouteReuseStrategy } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { DataService, AuthService, StorageService } from '@app/core/services';
+// For authentication API and so on
+// Cookie Service. Must needed for almost every project
+import { AuthService, StorageService } from '@core/services';
+
+// These provider for interceptors
+import { HttpService } from './http/http.service';
+import { RouteReusableStrategy } from './http/route-reusable-strategy';
+
+// If you want to make some component only accessible for logged in user
+// If user logged in then this guard will protect the user from entering in login page again
 import { AuthGuard, LoggedGuard } from './guards';
 
-import { HttpService } from './http/http.service';
-import { RouteReuseStrategy } from '@angular/router';
-import { RouteReusableStrategy } from './http/route-reusable-strategy';
+// This line for translation. If you don't want in your project just comment out the line
 import { I18nService } from './i18n';
-import { SkillService } from '@app/skills/skill.service';
 
 
 @NgModule({
     providers: [
+
+        // These provider for interceptors
         {
             provide: HttpClient,
             useClass: HttpService,
@@ -21,12 +30,20 @@ import { SkillService } from '@app/skills/skill.service';
             provide: RouteReuseStrategy,
             useClass: RouteReusableStrategy
         },
+
+        // Cookie Service. Must needed for almost every project
         StorageService,
-        DataService,
-        SkillService,
+
+        // For authentication API and so on
         AuthService,
+
+        // If you want to make some component only accessible for logged in user
         AuthGuard,
+
+        // If user logged in then this guard will protect the user from entering in login page again
         LoggedGuard,
+
+        // This line for translation. If you don't want in your project just comment out the line
         I18nService,
     ]
 })

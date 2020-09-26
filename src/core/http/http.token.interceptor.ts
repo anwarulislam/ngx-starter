@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StorageService } from '../services/storage.service';
-import { environment } from '@env/environment';
 
 @Injectable({ providedIn: 'root' })
 
@@ -11,8 +10,7 @@ export class HttpTokenInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const HEADERS_CONFIG = {
-            guest: 'TRUE',
-            publicKey: environment.public_key
+            guest: 'TRUE'
         };
 
         const token = this.storage.getItem('access_token');

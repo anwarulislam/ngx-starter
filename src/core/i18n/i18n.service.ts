@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
-import enUS from 'src/translations/en-US.json';
-import bnBD from 'src/translations/bn-BD.json';
+import * as enUS from '@translations/en-US.json';
+import * as bnBD from '@translations/bn-BD.json';
 import { StorageService } from '../services/storage.service';
 
 const languageKey = 'language';
@@ -29,7 +29,7 @@ export class I18nService {
     private langChangeSubscription!: Subscription;
 
     constructor(private translateService: TranslateService, private storage: StorageService) {
-    // Embed languages to avoid extra HTTP requests
+        // Embed languages to avoid extra HTTP requests
         translateService.setTranslation('bn-BD', bnBD);
         translateService.setTranslation('en-US', enUS);
     }
