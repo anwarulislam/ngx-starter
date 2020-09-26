@@ -3,6 +3,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
       "@app/*": [
         "src/app/*"
       ],
@@ -16,7 +19,6 @@
         "src/translations/*"
       ]
     },
-    "compileOnSave": false,
     "outDir": "./dist/out-tsc",
     "resolveJsonModule": true,
     "sourceMap": true,
