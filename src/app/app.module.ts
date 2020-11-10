@@ -15,8 +15,8 @@ import { AboutComponent } from './about/about.component';
     AboutComponent
   ],
   imports: [
-    CoreModule,
     SharedModule,
+    CoreModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
