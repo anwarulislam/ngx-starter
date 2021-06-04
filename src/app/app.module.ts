@@ -10,24 +10,20 @@ import { SharedModule } from '@shared/shared.module';
 import { AboutComponent } from './about/about.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AboutComponent
-  ],
+  declarations: [AppComponent, AboutComponent],
   imports: [
     SharedModule,
     CoreModule,
-    BrowserModule.withServerTransition({ appId: 'serverApp' }).withServerTransition({ appId: 'serverApp' }),
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
