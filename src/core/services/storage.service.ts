@@ -2,36 +2,34 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
+  // storage = localStorage
 
-    // storage = localStorage
+  constructor(private cookieService: CookieService) {}
 
-    constructor(private cookieService: CookieService) { }
+  public setItem(key: string, data: any, forgot?: boolean) {
+    data = data || null;
+    // const storage = forgot ? sessionStorage : localStorage;
+    // storage.setItem(key, data);
 
-    public setItem(key, data, forgot?: boolean) {
-        data = data || null;
-        // const storage = forgot ? sessionStorage : localStorage;
-        // storage.setItem(key, data);
+    this.cookieService.put(key, data, {
+      expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
+    });
+  }
 
-        this.cookieService.put(key, data, {
-            expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1))
-        });
-    }
+  public getItem(key: string, forgot?: boolean) {
+    // const storage = forgot ? sessionStorage : localStorage;
+    // let data = storage.getItem(key)
+    // return data
+    return this.cookieService.get(key);
+  }
 
-    public getItem(key, forgot?: boolean) {
-        // const storage = forgot ? sessionStorage : localStorage;
-        // let data = storage.getItem(key)
-        // return data
-        return this.cookieService.get(key);
+  public removeItem(key: string, forgot?: boolean) {
+    // const storage = forgot ? sessionStorage : localStorage;
+    // let data = storage.removeItem(key)
 
-    }
-
-    public removeItem(key, forgot?: boolean) {
-        // const storage = forgot ? sessionStorage : localStorage;
-        // let data = storage.removeItem(key)
-
-        this.cookieService.remove(key);
-    }
+    this.cookieService.remove(key);
+  }
 }
