@@ -15,9 +15,6 @@
       ],
       "@env/*": [
         "src/environments/*"
-      ],
-      "@translations/*": [
-        "src/translations/*"
       ]
     },
     "outDir": "./dist/out-tsc",

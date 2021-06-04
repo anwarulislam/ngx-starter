@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class StorageService {
     // const storage = forgot ? sessionStorage : localStorage;
     // storage.setItem(key, data);
 
-    this.cookieService.put(key, data, {
+    this.cookieService.set(key, data, {
       expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
     });
   }
@@ -30,6 +30,6 @@ export class StorageService {
     // const storage = forgot ? sessionStorage : localStorage;
     // let data = storage.removeItem(key)
 
-    this.cookieService.remove(key);
+    this.cookieService.delete(key);
   }
 }
